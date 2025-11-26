@@ -1,19 +1,43 @@
 ---
-title: "About"
+title: "About this blog"
 image: profile.jpg
 about:
   template: jolla
   links:
     - icon: twitter
       text: Twitter
-      href: https://twitter.com
+      href: https://twitter.com/danovertoom
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://linkedin.com/in/daniel-overtoom
     - icon: github
       text: Github
-      href: https://github.com
-
+      href: https://github.com/dovertoo/danalytics
 ---
 
-About this blog
+## Dan Overtoom
+
+-   Bachelor's of Science Degree in Mathematics from University of Maryland Baltimore County (UMBC) where I discovered my interest in anything and everything to do with data and analysis.
+-   Discovered `R` by accident when I took an *Environmental Statistics* class that had nothing to do with animals or ecosystems or climate data sets and everything to do with *Discovering R through Statistics*.
+-   Life long sports fan and enthusiast. Go Ravens and Whipsnakes and Retrievers and Terps and Orioles. Better at watching than playing but that has never stopped me from getting out there.
+-   Lover of the intersection of numbers and sports in the form of Fantasy Sports. Which lead me back to `R` as I discovered the world of *Fantasy Football Twitter* and the fascinating work that many are doing using publicly available data sets to bring analysis and statistical insight beyond the basic boxscore.
+-   Avid Lacrosse fan with a strong interest in **Growing The Game** by building upon the amazing work of so many in the lacrosse community.
+-   I enjoy exploring the outdoors of Maryland and the surrounding areas with my wife Natalie and our Goldendoodle Sage. We also enjoy exploring the restaurants and coffee shops that the area has to offer. Taco and breakfast food recommendations are highly encouraged.
+
+## Goals of this blog
+
+A personal goal of mine is to grow my data analysis skills. I feel that the best way to achieve this goal is through this blog. The process of creating this blog through `Distill` for `R` and subsequently porting the blog to `Quarto`, has taught me a great deal. I plan to explore data sets, create data visualizations, and thoroughly analyze questions that interest me using the R language. Anything that I learn that is worth sharing will be compiled here as a blog post or a series of blog posts. Please join me in my journey through `R` and data analysis and feel free to join in, offer advice or ask questions of your own that arise from this blog. Details on the resources that help me along this journey and ways to stay in touch with me are included below.
+
+## It Takes A Village
+
+This blog and everything I do in it would not be possible with out the [#rstats](https://twitter.com/hashtag/rstats) community and the many people within it that share their hard work so that others may learn. There are too many people to thank and highlight individually for their guidance and inspiration, so I encourage you to explore the depths on your own. Nonetheless, I will attempt to keep a running list of people and resources that have helped me along my journey:
+
+-   Thomas Mock's [The Mockup Blog](https://themockup.blog/) - great resource for launching a Distill blog, using images in plots and tables and so much more
+-   The fantasy football Twitter community - so many great people are putting out great work that inspired me to get back into R
+    -   nflfastR by [Ben Baldwin](https://twitter.com/benbbaldwin) and [Sebastian](https://twitter.com/mrcaseb) has inspired some awesome NFL data visualizations and analysis
+    -   One particular project that inspired me was [Josh Hornsby](https://twitter.com/Josh_ADHD)'s awesome Shiny App for the annual Scott Fish Bowl (check out [Fantasy Cares](https://fantasycares.net/))
+-   The R community puts out amazing documentation on just about anything you can think of. I highly encourage you to go on a voyage of discovery if you have any interest in learning `R`
+
+## Contact
+
+Best way to reach me is on Twitter [\@danovertoom](https://twitter.com/danovertoom). Questions, thoughts, comments, chirps and anything in between are welcomed and encouraged.
