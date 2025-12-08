@@ -188,7 +188,7 @@ Network Nodes are ready to go! Time to link them up.
 
 The links of a network show how the nodes connect (or don't connect) to each other. Network links can be directed (typically with an arrow to denote where link starts and ends) or un-directed, based on the nature of the interaction being described. For our assist network, we want to show which node is the assister and which node is the shooter. The link starting at the assister and ending with an arrow pointing to the shooter, provides a logical visual representation of the assist interaction. Within a game environment, it is not uncommon that players would classified as both an assister and a shooter. So, we expect to see two-way interactions in our networks (this also adds another layer of analysis to observe the amount of two-way interactions or lack thereof). In the case that two players assisted each other, the link will be shown with an arrow on each end to indicate each player received an assist from the other.
 
-It is common that a player may assist another player multiple times over the course of a game. When we go to visualize these, we can choose to either show a link for every connection between the two players or show the link once and add a label to show the number of times the link occurred. We will go the route of showing a link with a number denoting the frequency in order to have a cleaner looking visualization. Therefore, we want to create a dataframe that shows each assister-shooter combination with the frequency of each. Since it is redundant to label links that only occur once, we will filter this dataframe to include frequencies greater than one. Now, we are ready to create our network links dataframe. Similarly to our network links dataframe, the first two columns of the network links dataframe will be populated with the network link IDs. The first column should contain the node ID where the link will start, with the second column indicating the node ID at which the link ends. In the case of our assist network the first column will contain all assister node IDs and the second column will contain all shooter node IDs. The subsequent columns in the network links dataframe will be used to store any link attributes that we will need for plotting or analysis. For our assist network we will bring in the following attributes:
+It is common that a player may assist another player multiple times over the course of a game. When we go to visualize these, we can choose to either show a link for every connection between the two players or show the link once and add a label to show the number of times the link occurred. We will go the route of showing a link with a number denoting the frequency in order to have a cleaner looking visualization. Therefore, we want to create a dataframe that shows each assister-shooter combination with the frequency of each. Since it is redundant to label links that only occur once, we will set the label to blank when frequency is one. Now, we are ready to create our network links dataframe. Similarly to our network links dataframe, the first two columns of the network links dataframe will be populated with the network link IDs. The first column should contain the node ID where the link will start, with the second column indicating the node ID at which the link ends. In the case of our assist network the first column will contain all assister node IDs and the second column will contain all shooter node IDs. The subsequent columns in the network links dataframe will be used to store any link attributes that we will need for plotting or analysis. For our assist network we will bring in the following attributes:
 
 -   **assister_shooter_freq** - indicates the number of times the assister-shooter combination occurred within the game being analyzed.
 -   **assister_shooter_freq_label** - takes the number of times the assister-shooter combination occurred within the game and replaces any frequencies equal to one with a blank. This will be used to label each link and avoids unnecessary labeling.
@@ -199,16 +199,14 @@ Below is the code to create the network nodes dataframe:
 penn_assister_shooter_combo <- penn_ntwk_data %>%
   select(assister, shooter) %>%
   count(assister, shooter) %>%
-  rename(assister_shooter_freq = n) #%>%
-  #filter(assister_shooter_freq > 1)
+  rename(assister_shooter_freq = n) 
 
 penn_ntwk_links <- penn_ntwk_data %>%
   select(assister, shooter) %>% #gather all connections between assisters and shooters
   left_join(., penn_assister_shooter_combo, by = c("assister", "shooter")) %>%
   mutate(assister_shooter_freq_label = 
            if_else(assister_shooter_freq == 1, "", 
-                   as.character(assister_shooter_freq))) #%>%
-  #mutate(assister_shooter_freq = replace_na(assister_shooter_freq, 0))
+                   as.character(assister_shooter_freq)))
 ```
 
 Network Links are ready to go! Now we can create our network object.

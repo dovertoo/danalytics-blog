@@ -21,6 +21,7 @@
 
 
 
+
 <p>The most exciting aspect of sports (in my opinion) is watching players score. Even die-hard fans of great defense must admit that the excitement of a defensive stop comes from preventing an opposing player from scoring. A high powered offense is a sight to be seen. In free-flowing sports scores can come from excellent individual effort, precision passing leading to a catch and score, or as is often the case a combination of the two.</p>
 <p><img src="https://media.giphy.com/media/3o72F93I0BhqFXAdi0/giphy.gif" class="img-fluid"></p>
 <p>Today we are going to focus on passing. Specifically, assists or the successful passes that lead directly to a score. When watching free-flowing sports such as basketball, hockey and lacrosse, fans will be well aware of the players that execute passes which make it possible for other players to score. An observant fan may take note of which players have a particularly productive passing-scoring relationship throughout a game or a season. An even deeper level of fan may wonder how players and teams work together through passing to scoring. Then to take it a step further ask questions such as how effective are these scoring relationships? And, how do they grow and develop throughout a game/season either based on team philosophy, chemistry or matchups?</p>
@@ -638,7 +639,7 @@ font-style: inherit;">player_name =</span> assister_shooter)        </span></cod
 <section id="network-links" class="level3">
 <h3 class="anchored" data-anchor-id="network-links">Network Links</h3>
 <p>The links of a network show how the nodes connect (or don’t connect) to each other. Network links can be directed (typically with an arrow to denote where link starts and ends) or un-directed, based on the nature of the interaction being described. For our assist network, we want to show which node is the assister and which node is the shooter. The link starting at the assister and ending with an arrow pointing to the shooter, provides a logical visual representation of the assist interaction. Within a game environment, it is not uncommon that players would classified as both an assister and a shooter. So, we expect to see two-way interactions in our networks (this also adds another layer of analysis to observe the amount of two-way interactions or lack thereof). In the case that two players assisted each other, the link will be shown with an arrow on each end to indicate each player received an assist from the other.</p>
-<p>It is common that a player may assist another player multiple times over the course of a game. When we go to visualize these, we can choose to either show a link for every connection between the two players or show the link once and add a label to show the number of times the link occurred. We will go the route of showing a link with a number denoting the frequency in order to have a cleaner looking visualization. Therefore, we want to create a dataframe that shows each assister-shooter combination with the frequency of each. Since it is redundant to label links that only occur once, we will filter this dataframe to include frequencies greater than one. Now, we are ready to create our network links dataframe. Similarly to our network links dataframe, the first two columns of the network links dataframe will be populated with the network link IDs. The first column should contain the node ID where the link will start, with the second column indicating the node ID at which the link ends. In the case of our assist network the first column will contain all assister node IDs and the second column will contain all shooter node IDs. The subsequent columns in the network links dataframe will be used to store any link attributes that we will need for plotting or analysis. For our assist network we will bring in the following attributes:</p>
+<p>It is common that a player may assist another player multiple times over the course of a game. When we go to visualize these, we can choose to either show a link for every connection between the two players or show the link once and add a label to show the number of times the link occurred. We will go the route of showing a link with a number denoting the frequency in order to have a cleaner looking visualization. Therefore, we want to create a dataframe that shows each assister-shooter combination with the frequency of each. Since it is redundant to label links that only occur once, we will set the label to blank when frequency is one. Now, we are ready to create our network links dataframe. Similarly to our network links dataframe, the first two columns of the network links dataframe will be populated with the network link IDs. The first column should contain the node ID where the link will start, with the second column indicating the node ID at which the link ends. In the case of our assist network the first column will contain all assister node IDs and the second column will contain all shooter node IDs. The subsequent columns in the network links dataframe will be used to store any link attributes that we will need for plotting or analysis. For our assist network we will bring in the following attributes:</p>
 <ul>
 <li><strong>assister_shooter_freq</strong> - indicates the number of times the assister-shooter combination occurred within the game being analyzed.</li>
 <li><strong>assister_shooter_freq_label</strong> - takes the number of times the assister-shooter combination occurred within the game and replaces any frequencies equal to one with a blank. This will be used to label each link and avoids unnecessary labeling.</li>
@@ -664,26 +665,21 @@ font-style: inherit;">%&gt;%</span></span>
 background-color: null;
 font-style: inherit;">rename</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">assister_shooter_freq =</span> n) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#%&gt;%</span></span>
-<span id="cb13-5">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#filter(assister_shooter_freq &gt; 1)</span></span>
-<span id="cb13-6"></span>
-<span id="cb13-7">penn_ntwk_links <span class="ot" style="color: #003B4F;
+font-style: inherit;">assister_shooter_freq =</span> n) </span>
+<span id="cb13-5"></span>
+<span id="cb13-6">penn_ntwk_links <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> penn_ntwk_data <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb13-8">  <span class="fu" style="color: #4758AB;
+<span id="cb13-7">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">select</span>(assister, shooter) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">#gather all connections between assisters and shooters</span></span>
-<span id="cb13-9">  <span class="fu" style="color: #4758AB;
+<span id="cb13-8">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">left_join</span>(., penn_assister_shooter_combo, <span class="at" style="color: #657422;
 background-color: null;
@@ -696,12 +692,12 @@ background-color: null;
 font-style: inherit;">"shooter"</span>)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%&gt;%</span></span>
-<span id="cb13-10">  <span class="fu" style="color: #4758AB;
+<span id="cb13-9">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">assister_shooter_freq_label =</span> </span>
-<span id="cb13-11">           <span class="fu" style="color: #4758AB;
+<span id="cb13-10">           <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">if_else</span>(assister_shooter_freq <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -710,14 +706,9 @@ background-color: null;
 font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">""</span>, </span>
-<span id="cb13-12">                   <span class="fu" style="color: #4758AB;
+<span id="cb13-11">                   <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">as.character</span>(assister_shooter_freq))) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#%&gt;%</span></span>
-<span id="cb13-13">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#mutate(assister_shooter_freq = replace_na(assister_shooter_freq, 0))</span></span></code></pre></div></div>
+font-style: inherit;">as.character</span>(assister_shooter_freq)))</span></code></pre></div></div>
 </div>
 <p>Network Links are ready to go! Now we can create our network object.</p>
 </section>
@@ -1748,6 +1739,7 @@ Lacrosse.”</span> August 12, 2022. <a href="https://danalytics.blog/posts/2022
   <dc:creator>Dan Overtoom</dc:creator>
   <link>https://danalytics.blog/posts/2021-03-07-fantasy-lacrosse-2020-in-review-club-breakdown/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -17801,6 +17793,7 @@ Breakdown.”</span> March 7, 2021. <a href="https://danalytics.blog/posts/2021-
   <dc:creator>Dan Overtoom</dc:creator>
   <link>https://danalytics.blog/posts/2021-02-21-introducing-fantasy-lacrosse-2020-in-review/</link>
   <description><![CDATA[ 
+
 
 
 

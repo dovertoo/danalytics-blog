@@ -1,0 +1,34 @@
+/*-- scss:defaults --*/
+
+// use pulse as the base
+$theme: "pulse" !default;
+
+// Base document colors
+$body-bg: #17141f;
+$body-color: #ededed;
+$link-color: #9b83c0;
+
+// Code blocks
+$code-block-bg-alpha: -.9;
+
+//inline code
+$code-bg: #bdadd5; //#ded6ea;
+
+//code output
+.cell-output {
+    color: #ededed; // Set the text color of code output
+    background-color: #bdadd5; // #f8f9fa; // Optional: Set a background color
+    //border: 1px solid #dee2e6; // Optional: Add a border
+    //padding: 10px; // Optional: Add padding
+  }
+
+// import google fonts
+//@import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap';
+//@import 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap';
+
+/*-- scss:rules --*/
+
+// litera is serif by default: revert to san-serif
+//p {
+  //font-family: $font-family-sans-serif;
+//}

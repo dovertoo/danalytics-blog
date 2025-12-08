@@ -18,9 +18,9 @@ website:
 format:
   html:
     theme:
-      - cosmo
-      - brand
+      dark: [pulse, theme-dark.scss]
+      light: pulse
     css: styles.css
-
+    respect-user-color-scheme: true
 editor: visual
 
